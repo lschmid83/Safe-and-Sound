@@ -1,0 +1,4 @@
+AuthName "Google checkout Basic Authentication"
+AuthType Basic
+AuthUserFile /home/sites/safensound.co.uk/public_html/epdq_cpi/.htpasswd
+require valid-user

@@ -1,0 +1,130 @@
+/*
+
+bright: rgb(235,241,241);
+normal: rgb(235,241,241);
+dark:	rgb(235,241,241);
+
+*/
+
+
+
+
+.dynamic-tab-pane-control.tab-pane {
+	position:	relative;
+	//width:		100%;
+	width: 565px;
+	color:			Black;
+	font-family:	Verdana, Helvetica, Arial;
+	font-size:		14px;	
+}
+
+.dynamic-tab-pane-control .tab-row .tab {
+	font-family:	Verdana, Helvetica, Arial;
+	font-size:		12px;
+	cursor:			Default;
+	display:		inline;
+	float:			left;
+	padding:		7px 6px 3px 6px;
+	width: 100px;
+	margin-right:5px;
+	top:			-1px;
+/********** tab background (not selected) **********/
+	background:		rgb(234,242,255);
+/*   background-image: url("http://localhost/catalog/images/infobox/box_background.gif");*/  /* Use background image*
+
+/********** tab borders (not selected)**********/
+	background-image: url( "tab.png" );
+	border-color:	rgb(120,172,255);
+	border-left:	0;                                        /*hide  border left*/
+	border-bottom:	0;                                        /*hide  border bottom*/
+	border-top:	0;                                           /*hide  border top*/
+
+	
+	cursor:			hand;
+	cursor:			pointer;
+	
+	z-index:		1;
+	position:		relative;
+	height:15px;
+}
+
+.dynamic-tab-pane-control .tab-row .tab.selected {        /* Style for Selected tab */
+	border:			0;
+	border-bottom:	0;
+	z-index:		3;
+	padding:		7px 6px 3px 6px;
+	margin:			1px -6px -2px 0px;
+	top:			-2px;
+	background:		white;
+	background-image:	url( "tab_active.png" );
+	width:100px;
+	margin-right:5px;
+	align: center;
+}
+
+.dynamic-tab-pane-control .tab-row .tab.hover {        /* Style for Selected tab */
+	border:			0;
+	border-bottom:	0;
+	z-index:		3;
+	padding:		7px 6px 3px 6px;
+	margin:			1px -6px -2px 0px;
+	top:			-2px;
+	background:		white;
+	background-image:	url( "tab_hover.png" );
+	width:100px;
+	margin-right:5px;
+}
+
+.dynamic-tab-pane-control .tab-row .tab a {               /*Link Colour*/
+	align: center;
+	font-family:		Verdana, Helvetica, Arial;
+	font-size:		9px;
+	color:			black;
+	text-decoration:	none;
+	cursor:			hand;
+	cursor:			pointer;	
+}
+
+.dynamic-tab-pane-control .tab-row .hover a {             /*Link Colour on mouseover */
+   	color:	  color: #F00;
+
+	
+}
+
+.dynamic-tab-pane-control .tab-row .tab.selected a {
+	font-weight:	bold;
+}
+
+.dynamic-tab-pane-control .tab-page {
+	clear:			both;
+	border:			1px solid rgb(135,158,172);
+	background:		White;
+	z-index:		2;
+	position:		relative;
+	top:			-2px;
+	color:			Black;
+	font-family:		Verdana, Helvetica, Arial;
+	font-size:		11pt;
+	padding-left:		10px;
+	padding-right:		10px;
+}
+
+
+.dynamic-tab-pane-control .tab-row {
+	z-index:		1;
+	white-space:	nowrap;
+ /********************************************************* tab header background *************/
+	background:		rgb(255,255,255);
+/*   background:	   #F7F9FF;    */
+/*   background-image: url("http://localhost/catalog/images/infobox/box_background.gif");*/   /* Use background image*/
+
+	width:			100%;
+ /********************************************************* tab header outer borders **********/	
+/*	border:			1px solid;*/
+/*	border-color:	rgb(120,172,255);	*/
+	border-color: #BBC3D3;
+/*	border-left:	0; */                                     /*hide  border left*/
+	border-bottom:	0;                                        /*hide  border bottom*/
+/*	border-top:	0;*/                                         /*hide  border top*/
+	height:22ypx;
+}

@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /images/
+Disallow: /catalog/images/
+Disallow: /fpss/slideshows/myslideshow/images/

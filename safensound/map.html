@@ -1,0 +1,813 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-7615786-10");
+pageTracker._setDomainName(".maps.webhop.net");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+  <title>GPX Route Editor</title>
+  <script type="text/javascript"
+    src="http://developer.multimap.com/API/maps/1.2/OA10041416303721986">
+    // Note:  the above key is valid for the url ennismore.homeip.net.
+  </script>
+
+  <script type="text/javascript">
+    var mapviewer;
+    var maptype = MM_WORLD_MAP;
+    var pan_zoom_widget;
+    var map_type_widget;
+
+    var routePoints = new Array();
+    var numRoutePoints = 0;
+    var startPoint = -1;
+
+    var routeLine;
+    var cookieName = "RouteData";
+
+function onLoad() {
+    //Add the map
+    mapviewer = new MultimapViewer(
+         document.getElementById( 'mapviewer' ) );
+    mapviewer.goToPosition( new MMLatLon( 54.25, -1.01 ) );
+
+    // Select OS map data.
+    reverseDataPrefs();
+
+    // Add the pan-zoom widget.
+    pan_zoom_widget = new MMPanZoomWidget();
+    mapviewer.addWidget(pan_zoom_widget);
+    map_type_widget = new MMMapTypeWidget();
+    mapviewer.addWidget(map_type_widget)
+
+    // Add event handler for context menu to show our 'add marker' option.
+    mapviewer.addEventHandler( 'contextMenu', onContextMenu );
+    mapviewer.addEventHandler( 'click', clickEventHandler );
+    mapviewer.addEventHandler( 'mousemove', mouseMoveEventHandler );
+    mapviewer.addEventHandler( 'overlayEndDrag', clickEventHandler );
+    getDataCookie();
+    refreshPage(true);
+    }
+
+
+//////////////////////////////////////////////////////////////////
+// This switches the map to the 'alternative' data source.
+// For the UK this is the Ordnance Survey, which is what we want.
+///////////////////////////////////////////////////////////////////
+function reverseDataPrefs() {
+    var prefs = MMDataResolver.getDataPreferences( maptype);
+    var newprefs = [];
+    // Reverse order
+    for ( var i = prefs.length - 1 ; i >= 0; --i ) {
+        newprefs.push(prefs[i]);
+    }
+    // Re-draw map
+    MMDataResolver.setDataPreferences( maptype, newprefs );
+    mapviewer.redrawMap();
+}
+
+function setMapType(mtno) {
+    alert("mtno="+mtno);
+    var mapTypes=mapviewer.getAvailableMapTypes();
+    var mapTypesStr=' ';
+    for (var i=0;i<mapTypes.length;i++) {
+       mapTypesStr+=mapTypes[i]+' ';
+    }
+    alert("mapTypesStr="+mapTypesStr);
+    mapviewer.setMapType(mtno);
+    mapviewer.redrawMap();
+
+}
+
+
+////////////////////////////////////////////////////////////////////
+// NAME: refreshPage(rescale)
+// DESC: refreshes the page by updating the map scale and html data.
+// HIST: 03jan2008  GJ  ORIGINAL VERSION
+//
+function refreshPage(rescale) {
+    if (rescale==true && numRoutePoints>0) {
+       var autoScaleLocation = mapviewer.getAutoScaleLocation(routePoints)
+       mapviewer.drawAndPositionMap(autoScaleLocation);
+    }
+    mapviewer.redrawMap();
+    updateRouteList();
+//    updateForm(numRoutePoints-1);
+    drawRoute();
+    if (numRoutePoints>0) { saveDataCookie(); }
+}
+
+
+///////////////////////////////////////////////////////////////////////
+// Event handler for context menu selection (right click)
+// Adds an 'add marker' option which calls the 'addMarker()' function
+// to add a marker to the map
+///////////////////////////////////////////////////////////////////////
+function onContextMenu( type, target, menu, pos, step )
+{
+  items = [ { label : 'Add marker here', onclick : function() { addMarker(pos); menu.remove(); refreshPage(); }, className : 'MMaddmarker' } ];
+  menu.addItemsJSON( items );
+}
+
+//////////////////////////////////////////////////////////////////////////
+// NAME: getLastRoutePoint()
+// DESC: returns the number of the last route point in the list.
+// HIST: 02jan2008  GJ  ORIGINAL VERSION
+//
+function getLastRoutePoint() {
+
+  if (startPoint==-1) {
+    return(-1);
+  } else {
+    var currentPoint = startPoint;
+    while (routePoints[currentPoint].nextPoint!=-1) {
+       if (routePoints[currentPoint].nextPoint==currentPoint) {
+          alert("Error - getLastRoutePoint\n"+
+                 "Somehow the next point is this one ("+currentPoint+") - infinite loop!");
+          routePoints[currentPoint].nextPoint=-1;
+       }
+       currentPoint = routePoints[currentPoint].nextPoint;
+    }
+    return(currentPoint);
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////
+// NAME: getPreviousRoutePoint(rpno)
+// DESC: returns the number of the route point before the specified point in
+//       the list.
+// HIST: 02jan2008  GJ  ORIGINAL VERSION
+//
+function getPreviousRoutePoint(rpno) {
+
+  if (startPoint==-1) {
+    return(-1);
+  }
+  else
+  {
+     if (rpno==startPoint) {
+       return(-1);
+     }
+     else {
+//       alert ('getPreviousRoutePoint('+rpno+')');
+       var currentPoint = startPoint;
+       while (routePoints[currentPoint].nextPoint!=rpno) {
+          if (routePoints[currentPoint].nextPoint==currentPoint) {
+             alert("Error - getPreviousRoutePoint\n"+
+                    "Somehow the next point is this one ("+currentPoint+") - infinite loop!");
+             routePoints[currentPoint].nextPoint=-1;
+          }
+          currentPoint = routePoints[currentPoint].nextPoint;
+       }
+       return(currentPoint);
+     }
+  }
+}
+
+
+
+///////////////////////////////////////////////////////////////////////////
+// NAME:  addMarker(pos,lbl)
+// DESC:  Adds a marker at the specified map position.
+//        Also adds it to the array routePoints which stores the
+//        current set of markers.
+// HIST:  28dec2007  GJ  ORIGINAL VERSION
+//        01jan2008  GJ  saves data to cookie after adding point.
+//        02jan2008  GJ  automatically adds the point to the linked list
+//                       to show order.
+///////////////////////////////////////////////////////////////////////////
+function addMarker(pos,lbl) {
+   var label;
+   var thisPoint = numRoutePoints;
+   var lastPoint = -1;
+
+   if (numRoutePoints !=-1) {
+      lastPoint = getLastRoutePoint();
+   }
+
+   if (lbl) {
+      label = lbl
+   }
+   else {
+      label = 'Point No: '+thisPoint;
+   }
+
+    routePoints[thisPoint]
+             = mapviewer.createMarker( pos, {'text':thisPoint, 'label': label, 'draggable': true} );
+    numRoutePoints ++;
+
+    routePoints[thisPoint].nextPoint=-1;       // this point is not linked to
+                                               // anything - it is added to
+                                               // the end of the route
+    // Link the point that was previously at the end to this point.
+    if (lastPoint!=-1) {
+       routePoints[lastPoint].nextPoint=thisPoint;
+    }
+
+    // If we are creating the first point, set the start of the linked list.
+    if (numRoutePoints==1) {
+       startPoint=0;
+    }
+
+}
+
+
+///////////////////////////////////////////////////////////////////////////
+// NAME: drawRoute()
+// DESC: Draws a polyline between linked markers to show the route
+// HIST: 31dec2007  GJ  ORIGINAL VERSION.
+//
+function drawRoute() {
+   if (startPoint==-1) {
+      return;
+   }
+   else
+   {
+     var points = new Array();
+     points.push(routePoints[startPoint].getPosition().coords);
+     var nextpt=routePoints[startPoint].nextPoint;
+
+     while (nextpt!=-1) {
+        points.push(routePoints[nextpt].getPosition().coords);
+	n = routePoints[nextpt].nextPoint;
+	nextpt = n;
+     }
+
+     if (routeLine) routeLine.remove();
+     routeLine = new MMPolyLineOverlay( points);
+     mapviewer.addOverlay(routeLine)
+   }
+}
+
+
+///////////////////////////////////////////////////////////////////////////
+// NAME: updateForm(rpno)
+// DESC: updates the form on the web page with the currently stored info for
+//       the specified route point number (marker).
+// HIST: 31dec2007 GJ  ORIGINAL VERSION
+//
+function updateForm(rpno) {
+   var pos;
+   var rp;
+   rp = routePoints[rpno];
+
+   document.pointinfo.pointno.value=rpno;
+   document.pointinfo.label.value=rp.getOption('label');
+   document.pointinfo.mtext.value=rp.getOption('text');
+   pos = rp.getPosition();
+   document.pointinfo.lat.value=pos.coords.lat;
+   document.pointinfo.lon.value=pos.coords.lon;
+   document.pointinfo.nextpt.value=rp.nextPoint;
+}
+
+///////////////////////////////////////////////////////////////////
+// NAME: updateRoutePoint()
+// DESC: Updates the route point currently displayed in the web page
+//       form with the form data.
+// HIST: 31dec2007  GJ  ORIGINAL VERSION
+//
+function updateRoutePoint() {
+   var rpno;
+   var label;
+   var mtext;
+   var lat;
+   var lon;
+   var pos = new MMLocation();
+
+
+   rpno = document.pointinfo.pointno.value;
+   mtext = document.pointinfo.mtext.value;
+   label = document.pointinfo.label.value;
+   lat  = document.pointinfo.lat.value;
+   lon  = document.pointinfo.lon.value;
+
+   var coords=new MMLatLon(lat,lon);
+   pos.coords= coords;
+
+   routePoints[rpno].reset(pos,{'label':label,'text':mtext})
+   routePoints[rpno].nextPoint=document.pointinfo.nextpt.value
+
+   refreshPage(false)
+}
+
+///////////////////////////////////////////////////////////////////////
+// NAME: moveRoutePointUp(rpno)
+// DESC: Moves the specified route point one step up in the route list
+//        (i.e. closer to the beginning of the route).
+// HIST: 02jan2008  GJ  ORIGINAL VERSION
+//
+function moveRoutePointUp(rpno) {
+   var previousPoint = -1;
+   var prevMinusOnePoint = -1;
+   var nextPoint;
+   var currentPoint = rpno;
+
+   if (currentPoint==-1) return;
+
+   nextPoint = routePoints[currentPoint].nextPoint;
+   previousPoint = getPreviousRoutePoint(rpno);
+   prevMinusOnePoint = getPreviousRoutePoint(previousPoint);
+
+
+   if (previousPoint==startPoint) {  // ie this is first on the list
+      startPoint = currentPoint;
+      routePoints[currentPoint].nextPoint=previousPoint;
+      routePoints[previousPoint].nextPoint=nextPoint;
+   } else {
+      routePoints[prevMinusOnePoint].nextPoint=currentPoint;
+      routePoints[currentPoint].nextPoint=previousPoint;
+      routePoints[previousPoint].nextPoint=nextPoint;
+   }
+   refreshPage(false);
+}
+
+
+///////////////////////////////////////////////////////////////////////
+// NAME: moveRoutePointDown(rpno)
+// DESC: Moves the specified route point one step down in the route list
+//        (i.e. closer to the end of the route).
+// HIST: 02jan2008  GJ  ORIGINAL VERSION
+//
+function moveRoutePointDown(rpno) {
+   var previousPoint = -1;
+   var nextPoint;
+   var nextPlusOnePoint;
+   var currentPoint = rpno;
+
+   if (currentPoint==-1) return;
+
+   nextPoint = routePoints[currentPoint].nextPoint;
+   nextPlusOnePoint = routePoints[nextPoint].nextPoint;
+   previousPoint = getPreviousRoutePoint(rpno);
+
+
+   if (previousPoint==-1) {  // ie this is first on the list
+      startPoint = nextPoint;
+      routePoints[nextPoint].nextPoint=currentPoint;
+      routePoints[currentPoint].nextPoint=nextPlusOnePoint;
+   } else {
+      routePoints[previousPoint].nextPoint=nextPoint;
+      routePoints[nextPoint].nextPoint=currentPoint;
+      routePoints[currentPoint].nextPoint=nextPlusOnePoint;
+   }
+   refreshPage(false);
+}
+
+
+
+///////////////////////////////////////////////////////////////////////
+// NAME: updateRouteList()
+// DESC: re-draws the route list cell on the right of the map to show
+//       all of the currently specified route points in order.
+// HIST: 01jan2008 GJ  ORIGINAL VERSION
+//       02jan2008 GJ  Uses linked list to show points in route order.
+//       03jan2008 GJ  draws a table rather than an HTML list, and includes
+//                     distances between points.
+//
+function updateRouteList() {
+   var rpno = startPoint;
+   var distFromPrev = 0;
+   var cumDist = 0;
+   var startLatLon;
+   var currLatLon;
+   var prevLatLon;
+
+   if (numRoutePoints==0) {
+      var html='<h3>Route Points</h3>';
+      html+='<center><table border=\"1\">';
+      html+='<tr><td>No Route Points</td></td>';
+      html+='</table></center>';
+      document.getElementById('RouteInfoCell').innerHTML=html;
+      return;
+   }
+
+   startLatLon = routePoints[startPoint].getPosition().coords;
+   prevLatLon = startLatLon;
+
+   var html='<h3>Route Points</h3>';
+   html+='<center><table border=\"1\">';
+   html+='<COL><COL align=\"center\" char=\".\"><COL align=\"center\" char=\".\">';
+   html+='<thead>';
+   html+='<tr><th>Point</th><th>Dist from Previous (km)</th>';
+   html+='<th>Cumulative Distance (km)</th><th>Re-Order Points</th></tr>';
+   html+='<tbody>';
+   while (rpno!=-1) {
+      currLatLon = routePoints[rpno].getPosition().coords;
+      distFromPrev = mapviewer.getGreatCircleDistance(currLatLon,prevLatLon,'km');
+      cumDist+=distFromPrev;
+      prevLatLon=currLatLon;
+      html+='<tr>';
+      html+= '<td>'+ routePoints[rpno].getOption('label')+'</td>';
+      html+= '<td>'+ formatNumber(distFromPrev,2) + '</td>';
+      html+= '<td>'+ formatNumber(cumDist,2) + '</td>';
+      html+= '<td>';
+      if(rpno!=startPoint) {
+         html+='<a onclick=moveRoutePointUp('+rpno+')><image src=\"uparrow.png\"></a>';
+      } else {
+         html+='--';
+      }
+      if(routePoints[rpno].nextPoint!=-1) {
+         html+='<a onclick=moveRoutePointDown('+rpno+')><image src=\"downarrow.png\"></a>';
+      } else {
+         html+='--';
+      }
+      html+='</td>';
+      html+='</tr>';
+      rpno = routePoints[rpno].nextPoint;
+    }
+    html+='</table></center>';
+    document.getElementById('RouteInfoCell').innerHTML=html;
+}
+
+////////////////////////////////////////////////////////
+// NAME: formatNumber(theNum, numDecPlaces)
+// DESC: returns 'theNum' formatted as a string
+//       to 'numDecPlaces' deciamal places.
+// HIST:
+//       03jan2008  GJ  found it at java2s.com
+//                  GJ  added check for no decimal point.
+function formatNumber(theNum, numDecPlaces)
+{
+     var num = new String();
+     num = "" + theNum;
+     var pos = 0;
+     count = 0;
+
+     // if there is no decimal point, return the whole thing.
+     if (num.indexOf('.')==-1) {
+       return(num);
+     }
+
+     while (num.substring(pos-1,pos)!== ".") {
+       pos += 1 ;
+       count += 1;
+     }
+     while (pos < (count+numDecPlaces)){
+       pos +=1;
+     }
+     return num.substring(0,pos);
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////
+// NAME: keypressEventHandler()
+// DESC: stores the codes of the currently pressed keys in the global
+//       array keysPressed[].
+// HIST: 31dec2007 GJ  ORIGINAL VERSION
+//
+function keypressEventHandler() {
+   // This is not bound to anything at the moment!!!
+
+}
+
+
+
+///////////////////////////////////////////////////////////////////////
+// NAME: clickEventHandler()
+// DESC: event handler for click and marker drag events on the map.
+// HIST: 31dec2007  GJ  ORIGINAL VERSION.
+//
+function clickEventHandler( eventType, eventTarget, arg1, arg2, arg3 )
+{
+   if (eventTarget instanceof MMMarkerOverlay) {
+      //alert('EventTarget=marker');
+      for (var rpno=0; rpno<numRoutePoints; rpno++) {
+         if (eventTarget==routePoints[rpno])
+             updateForm(rpno);
+      }
+      refreshPage();
+   }
+}
+
+///////////////////////////////////////////////////////////////////////
+// NAME: mouseMoveEventHandler
+// DESC: updates the current lat/lon on the page form as the mouse moves
+// HIST: 31dec2007  GJ  ORIGINAL VERSION
+//
+function mouseMoveEventHandler( type, target, pixelpos ) {
+//   alert('mouseMoveEventHandler - pixelpos='+pixelpos.x+','+pixelpos.y);
+   if( pixelpos ) { // Pixel pos will not be set if you mouse over a marker
+       var dims = mapviewer.getDimensions();
+       pixelpos.x -= dims.width / 2;
+       pixelpos.y -= dims.height / 2;
+       var latlon = mapviewer.getMapPositionAt( pixelpos );
+       document.pointinfo.curlat.value=latlon.lat;
+       document.pointinfo.curlon.value=latlon.lon;
+   } else {
+   //  alert('pixelpos not set');
+   }
+}
+
+////////////////////////////////////////////////////////////////
+// NAME: rtept2XML(rpno)
+// DESC: Returns a string containing an XML (GPX) representation
+//       of the specified route point.
+// HIST: 31dec2007  GJ  ORIGINAL VERSION
+//
+function rtept2XML(rpno) {
+    var op = '';
+    var lat;
+    var lon;
+    var pos;
+    pos = routePoints[rpno].getPosition();
+    lat = pos.coords.lat;
+    lon = pos.coords.lon;
+    op += '   <rtept'
+    op += ' lat=\"'+lat+'\" ';
+    op += ' lon=\"'+lon+'\" ';
+    op += '>';
+    op += '\n';
+    op += '     <name>'+routePoints[rpno].getOption('label')+'</name>\n';
+    op += '   </rtept>';
+    return(op);
+}
+
+////////////////////////////////////////////////////////////////
+// NAME: makeGPXData()
+// DESC: creates a GPX data set from the routePoints[] markers
+//       and puts it in the GPXData text box at the bottom of the page
+// HIST: 31dec2007  GJ  ORIGINAL VERSION
+//
+function makeGPXData() {
+   var gpxlines = new Array();  // one element per line in GPX file.
+
+   gpxlines.push("<?xml version=\"1.0\"?>");
+   gpxlines.push("<gpx version=\"1.1\"");
+   gpxlines.push("     creator=\"Graham Jones\">");
+   gpxlines.push("<rte>");
+   gpxlines.push("    <name>"+document.pointinfo.rtename.value+"</name>");
+   var i = startPoint;
+   while (i!=-1) {
+      gpxlines.push(rtept2XML(i));
+      i = routePoints[i].nextPoint;
+   }
+   gpxlines.push("</rte>");
+   gpxlines.push("</gpx>");
+   document.GPXdata.GPXdata.value = gpxlines.join('\n');
+   document.cookie = cookieName+'='+escape(document.GPXdata.GPXdata.value);
+}
+
+//////////////////////////////////////////////////////////////////
+// NAME: saveDataCookie()
+// DESC: saves the current set of route points as a GPX file in
+//       a cookie.
+// HIST: 01/01/2008  GJ  ORIGINAL VERSION
+//
+function saveDataCookie() {
+   //alert('saveDataCookie()');
+   makeGPXData();
+}
+
+//////////////////////////////////////////////////////////////////
+// NAME: getDataCookie()
+// DESC: retrieves the last set of route points as a GPX file from
+//       a cookie.
+// HIST: 01/01/2008  GJ  ORIGINAL VERSION
+//
+function getDataCookie() {
+   if (document.cookie.length>0)
+   {
+      c_start=document.cookie.indexOf(cookieName + "=");
+      if (c_start!=-1)
+      {
+         c_start=c_start + cookieName.length+1;
+	 c_end=document.cookie.indexOf(";",c_start);
+	 if (c_end==-1) c_end=document.cookie.length;
+	 document.GPXdata.GPXdata.value =
+              unescape(document.cookie.substring(c_start,c_end));
+	 //alert("cookie ="+document.GPXdata.GPXdata.value);
+	 loadGPXData(document.GPXdata.GPXdata.value);
+	 //alert("getDataCookie - numRoutePoints="+numRoutePoints);
+      }
+      else
+      {
+         document.GPXdata.GPXdata.value = "Cookie Name "+cookieName+" Not Found";
+      }
+   }
+   else
+   {
+      document.GPXdata.GPXdata.value = "No Cookie Set";
+   }
+}
+
+function sendData()
+{
+  // Initialize packed or we get the word 'undefined'
+  var packed = "";
+  var pos;
+  for (i = 0; (i < routePoints.length); i++) {
+    if (i > 0) {
+      packed += ",";
+    }
+    pos = routePoints[i].getPosition()
+    packed += escape('<rtept lat='+pos.coords.lat+' lon='+pos.coords.lon+'><name>'+'RP['+i+']'+'</name></rtept>');
+  }
+  document.data.data.value = packed;
+  document.data.submit();
+}
+
+
+////////////////////////////////////////////////
+// NAME: loadGPXData(text)
+// DESC: parses the string 'text' (which should be
+//       a valid GPX file)and creates a marker for each
+//       route point.
+// HIST: 01/01/2008  GJ  ORIGINAL VERSION
+//
+function loadGPXData(text) {
+   clearRoute();
+   // code for IE
+   if (window.ActiveXObject)
+     {
+        var doc=new ActiveXObject("Microsoft.XMLDOM");
+	doc.async="false";
+	doc.loadXML(text);
+     }
+   // code for Mozilla, Firefox, Opera, etc.
+   else
+   {
+      var parser=new DOMParser();
+      var doc=parser.parseFromString(text,"text/xml");
+   }
+
+   // documentElement always represents the root node
+   var x=doc.documentElement;
+
+   // Get the route name
+   var routeName = "route";
+   var routeNameElements = doc.getElementsByTagName("name");
+   routeName = routeNameElements[0].childNodes[0].nodeValue;
+   document.pointinfo.rtename.value = routeName;
+   //alert("GPX routeName = "+routeName);
+
+   // Get the Route Points
+   var rpts=doc.getElementsByTagName("rtept");
+   for (var i=0;i<rpts.length;i++)
+     {
+        var attlist=rpts.item(i).attributes;
+	var lat=attlist.getNamedItem('lat').value;
+	var lon=attlist.getNamedItem('lon').value;
+	var label=rpts[i].getElementsByTagName('name')[0].childNodes[0].nodeValue
+
+	var pos = new MMLatLon(lat,lon)
+	addMarker(pos,label);
+     }
+     refreshPage(true);
+}
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+// NAME getGPXData(url)
+// DESC: downloads a file from the url specified
+//       and puts it into the GPXdata text area, then processes the data as
+//       a GPX route using the loadGPXData() function.
+// HIST: 06jan2008  GJ  ORIGINAL VERSION
+//
+function getGPXData(url) {
+  var xmlhttp;
+  xmlhttp=null;
+  // code for Mozilla, etc.
+  if (window.XMLHttpRequest)
+    {
+      xmlhttp=new XMLHttpRequest();
+    }
+   // code for IE
+  else if (window.ActiveXObject)
+    {
+     xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+  if (xmlhttp!=null)
+    {
+//       xmlhttp.onreadystatechange=state_Change;
+       xmlhttp.open("GET",url,false);
+       xmlhttp.send(null);
+       document.GPXdata.GPXdata.value=xmlhttp.responseText;
+       loadGPXData(document.GPXdata.GPXdata.value);
+    }
+  else
+    {
+     alert("Your browser does not support XMLHTTP.");
+    }
+}
+
+
+
+/////////////////////////////////////////
+// NAME: clearRoute
+// DESC: clears the routePoints array and
+//       deletes all markers.
+// HIST: 31dec2007  GJ  ORIGINAL VERSION
+//
+function clearRoute() {
+   mapviewer.removeAllOverlays();
+   numRoutePoints = 0;
+   routePoints = new Array();
+   startPoint = -1;
+   document.pointinfo.reset();
+   document.GPXdata.reset();
+   refreshPage(true);
+}
+
+
+
+
+////////////////////////////////////////////////////////////////////////
+// This is the main program - it just calls onLoad
+//
+    MMAttachEvent( window, 'load', onLoad );
+
+</script>
+
+</head>
+
+<body>
+<table>
+<tr>
+<td span=2><h2>GPX Route Editor</h2>
+<a href="#RouteList">Route List</a>
+<a href="#GPXData">GPX Data</a>
+<a href="#" onclick="reverseDataPrefs();">Switch Map Data</a>
+<a href="#" onclick="setMapType(MM_WORLD_MAP);">Map</a>
+<a href="#" onclick="setMapType(MM_WORLD_AERIAL);">Aerial</a>
+<a href="#" onclick="setMapType(MM_WORLD_HYBRID);">Hybrid</a>
+</td>
+</tr>
+<tr>
+<td>
+    <div id="mapviewer" style="width: 800px; height: 500px;"></div>
+    </td>
+<td>
+    <form name="pointinfo" method="POST">
+        <table border="1">
+	   <tr><th colspan="2">Cursor Position</th></tr>
+           <tr>
+	       <td>Lat:</td>
+               <td><input type="text" name="curlat" value="#.#####" size="8" disabled></td></tr>
+           <tr>
+               <td>Lon:</td>
+               <td><input type="text" name="curlon" value="#.#####" size="8" disabled></td></tr>
+	   <tr><td colspan="2"></td></tr>
+	   <tr><th colspan="2">Route Name</th></tr>
+	   <tr><td colspan="2"><input type="text" name="rtename" value="route"> </td></tr>
+	   <tr><td colspan="2"></td></tr>
+	   <tr><th colspan="2">Selected Point</th></tr>
+	   <tr>
+               <td>No.</td>
+               <td><input type="text" name="pointno" size="3" value="-" disabled"></td>
+	   </tr>
+	   <tr>
+               <td>Marker Text</td>
+               <td><input type="text" name="mtext" size="10" value="-" onchange="updateRoutePoint()"></td>
+	   </tr>
+	   <tr><td>Label</td>
+               <td><textarea name="label" rows=3 cols=10 onchange="updateRoutePoint()">-</textarea></td>
+	   </tr>
+	       <tr><td>lat</td>
+	       <td><input type="text" name="lat" value="#.#####" size="8" onchange="updateRoutePoint()"></td>
+	   </tr>
+	   <tr>
+	       <td>lon</td>
+               <td><input type="text" name="lon" value="#.#####" size="8" onchange="updateRoutePoint()"></td>
+	   </tr>
+	   <tr>
+	       <td>Next Point</td>
+               <td><input type="text" name="nextpt" value="-1" size="3" onchange="updateRoutePoint()" onblur="updateRoutePoint()"></td>
+	   </tr>
+	   <tr><td colspan="2"></td></tr>
+	   <tr><td colspan="2"><a href="#" onclick="makeGPXData(); return false;">Make GPX Data</a></td></tr>
+	   <tr><td colspan="2"><a href="#" onclick="clearRoute(); return false;">Clear Route</a></td></tr>
+	</table>
+    </form>
+</td>
+</tr>
+</table>
+
+<a name="RouteList"></a>
+<table><tr><td id="RouteInfoCell">Route Info</td></tr></table>
+
+<h3><a name=GPXData>GPX Data</a></h3>
+<form name="GPXdata" method="POST" action="null">
+    <textarea rows=10, cols=100 name="GPXdata">GPX Data</textarea>
+</form>
+<a href='#GPXData' onclick='document.GPXdata.GPXdata.focus();document.GPXdata.GPXdata.select();'>Select All</a>
+<a href='#' onclick="loadGPXData(document.GPXdata.GPXdata.value);">Process GPX Data</a>
+<form name="GetURLData" method='POST' action='null'>
+    <input type="text" name='text' size='100' value='http://www.ennismore.homeip.net/monopoly.gpx'>
+</form>
+<a href='#' onclick="getGPXData(document.GetURLData.text.value);">Download GPX Data from Server</a>
+
+</body>
+
+</html>
+

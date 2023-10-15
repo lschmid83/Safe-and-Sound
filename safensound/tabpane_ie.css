@@ -1,0 +1,66 @@
+.dynamic-tab-pane-control .tab-page {
+	height:300px;
+	width:576px;
+	overflow-x:hidden;
+	overflow-y:scroll;
+}
+
+.dynamic-tab-pane-control .tab-page .dynamic-tab-pane-control .tab-page {
+	height:	300px;
+	width:553px;
+}
+
+#prodDesc{
+	margin-top:5px; 
+	padding-left:10px;
+	padding-right:8px;
+	
+}
+
+#prodDesc p {
+
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 11px;
+  line-height: 1.3;
+  color: #000;
+	
+}
+
+#prodDesc  ul{
+    margin:0;
+    padding: 0;
+       
+}
+
+#prodDesc  li{
+    color: #000;
+    margin: .25em 0;
+    
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 11px;
+  line-height: 1.3;
+	color: #000;	
+	text-align: left;
+	margin-left:17px;
+
+}
+
+#prodDesc A { 
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 11px;
+  line-height: 1.3;
+
+  color: #000; 
+  text-decoration: none; 
+}
+
+#prodDesc A:hover { 
+  color: #F00;
+  text-decoration: none; 
+}
+
+
+#prodDesc IMG
+{
+border:none;
+}

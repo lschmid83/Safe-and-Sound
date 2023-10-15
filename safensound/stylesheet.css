@@ -1,0 +1,1086 @@
+
+/*
+  $Id: stylesheet.css, template: OS03C00286 v3.00 09/25/08  13:07:09 project3000 Exp $
+
+  This file created as a part of graphical design by AlgoZone, Inc
+  http://www.algozone.com for osCommerce v 2.2ms2
+  
+  Copyright (c) 2003-2005 AlgoZone, Inc
+
+*/
+
+BODY {
+	background-color: #FFFFFF;
+	font-family: Helvetica;
+	font-size: 11px;
+	margin: 0px;
+	background-image: url(http://localhost:7080/safensound/catalog/images/bg.png);
+	background-repeat: repeat-x;
+	margin-bottom: 5px;
+}
+.az_main_cont {
+    background-image: url("images/az_top_bg_left.gif");
+    background-repeat: repeat-x;
+	background-position: top;
+}
+/* .breadCrumb,.plainbox-description and "BODY TD" for ZenCart */ 
+.boxText, .breadCrumb, .plainbox-description, BODY TD
+{ font-family: Tahoma, Verdana, Arial, sans-serif; font-size: 11px; color: #7d7a78;}
+.errorBox { font-family : Verdana, Arial, sans-serif; font-size : 10px; font-weight: bold; }
+.stockWarning { font-family : Verdana, Arial, sans-serif; font-size : 10px; color: #000; }
+.productsNotifications { background: #f2fff7; }
+.orderEdit { font-family : Verdana, Arial, sans-serif; font-size : 10px; color: #70d250; text-decoration: underline; }
+A { 
+  color: #000; 
+  text-decoration: none; 
+}
+A:hover { 
+  color: #F00;
+  text-decoration: none; 
+}
+FORM {
+  display: inline;
+}
+INPUT{
+  border: 1px solid #c0c0c0;
+  background: #FFFFFF;
+  color: #3e3c3c;
+  margin: 2px;
+}
+INPUT.az_search_input, SELECT.az_search_input{
+  border: 1px solid #c0c0c0;
+  color: #3e3c3c;
+}
+INPUT.submit_button, INPUT.az_login_input{
+	border: 0px;
+}
+TR.header {
+  background: #17191D;
+}
+TD.infoBox, SPAN.infoBox { 
+	font-family: Verdana, Arial, sans-serif; font-size: 8px; 
+}
+/* .plainBox for ZenCart and moduleBox for ms3 */ 
+.infoBox, .plainBox, .moduleBox, .newProductsBox {
+  border: 1px solid #c0c0c0;
+  padding: 2px;
+   background-color:t#ffffff;
+
+}
+.moduleBox{
+  margin: 0px;
+ background-color:#ffffff;
+
+}
+.infoBoxLanguages {
+}
+.newProductsBox, .infoBoxCenter {
+background-color:#ffffff;
+
+}
+.infoBoxContentsLeft TD{
+font-family: Tahoma;
+font-size: 11px;
+font-weight: normal;
+}
+.infoBoxHeading {
+}
+/* middle boxes control*/
+/* .plainBoxHeading for ZenCart */ 
+TD.infoBoxHeading, TD.infoBoxHeadingCenter, TD.plainBoxHeading, TD.productListing-heading {
+  font-family: Tahoma;
+  font-size: 11px;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: left;
+  padding-left: 10px;
+  height: 24px;
+  background-image: url("images/az_box_top_m.gif");
+  background-repeat: repeat-x;
+  background-position: top;
+}
+.infoBoxHeadingLcorner, .infoBoxHeadingLcornerCenter {
+  background-image: url("images/az_box_top_l.gif");
+  background-repeat: no-repeat;
+  background-position: top;
+  width: 23px;
+}
+.infoBoxHeadingRcorner, .infoBoxHeadingRcornerCenter {
+  background-image: url("images/az_box_top_r.gif");
+  background-repeat: no-repeat;
+  background-position: top;
+  width: 6px;
+}
+.infoBoxLeft_az01, .infoBoxLeft, .infoBoxRight {
+  border: 1px solid #c0c0c0;
+  background-color: #ebf1f1;
+}
+
+TD.infoBoxHeadingLeft, TD.infoBoxHeadingLeft_categ, TD.infoBoxHeadingRight {
+  font-family: Tahoma;
+  font-size: 11px;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: left;
+  padding-left: 5px;
+  padding-top:2px;
+  height: 24px;
+  background-image: url("images/az_box_top_m.gif");
+  background-repeat: repeat-x;
+  background-position: top;
+}
+.infoBoxHeadingLcornerLeft, .infoBoxHeadingLcornerLeft_categ, .infoBoxHeadingLcornerRight {
+  background-image: url("images/az_box_top_l.gif");
+  background-repeat: no-repeat;
+  background-position: top;
+  width: 23px;
+}
+.infoBoxHeadingRcornerLeft, .infoBoxHeadingRcornerLeft_Categ, .infoBoxHeadingRcornerRight {
+  background-image: url("images/az_box_top_r.gif");
+  background-repeat: no-repeat;
+  background-position: top;
+  width: 6px;
+}
+.infoBoxHeadingLeft A:link, .infoBoxHeadingLeft A:active, .infoBoxHeadingLeft A:visited,
+.infoBoxHeadingRight A:link, .infoBoxHeadingRight A:active, .infoBoxHeadingRight A:visited {
+  font-family: Tahoma;
+  font-size: 11px;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: left;
+}
+.infoBoxHeadingLeft A:hover, .infoBoxHeadingRight A:hover {
+	color: #F00;
+}
+.infoBoxHeadingSearch{
+	padding-top: 3px;
+	color: #ffffff;
+}
+.infoBoxSearch{
+	font-family: Tahoma;
+	font-size: 12px;
+	font-weight: normal;
+	color: #ffffff;
+}
+.infoBoxContentsSearch, .infoBoxContentsSearch td.boxText{
+	font-family: Tahoma;
+	font-size: 12px;
+	font-weight: normal;
+	color: #ffffff;
+}
+.infoBoxContentsSearch A:link, .infoBoxContentsSearch A:active, .infoBoxContentsSearch A:visited {
+	font-family: Tahoma;
+	font-size: 11px;
+	font-weight: normal;
+	color: #ffffff;
+}
+.infoBoxContentsSearch A:hover {
+	font-family: Tahoma;
+	font-size: 11px;
+	font-weight: normal;
+	color: #707070;
+}
+.infoBoxHeadingCart
+{
+	font-family: Tahoma;
+	font-size: 11px;
+	font-weight: normal;
+	color: #bdbdbd;
+}
+.infoBoxCart, .az_cart_body TD{
+	font-family: Tahoma;
+	font-size: 11px;
+	font-weight: normal;
+	color: #bdbdbd;
+}
+.infoBoxContentsCart {
+	vertical-align: top;
+}
+.infoBoxContents, .infoBoxContentsLeft, .infoBoxContentsLeft_categ, .infoBoxContentsRight {
+  /* Uncomment to get bacground for component's content */
+	font-family: Tahoma;
+	font-size: 11px;
+	font-weight: normal;
+	color: #000;	
+	text-align: left;
+	line-height: 1.5;
+
+}
+.infoBoxContentsRight {
+  /* Uncomment to get bacground for component's content */
+	font-family: Tahoma;
+	font-size: 11px;
+	font-weight: normal;
+	color: #000;	
+}
+.infoBoxContents A:link, .infoBoxContents A:active, .infoBoxContents A:visited{
+	font-family: Tahoma;
+	font-size: 11px;
+	font-weight: normal;
+	color: #000;
+}
+.infoBoxContents A:hover {
+	font-family: Tahoma;
+	font-size: 11px;
+	font-weight: normal;
+	color: #F00;
+}
+
+.infoBoxContentsLeft A:link, .infoBoxContentsLeft A:active, .infoBoxContentsLeft A:visited{
+	font-family: Tahoma;
+	font-size: 11px;
+	font-weight: normal;
+    text-decoration: none; 
+	color: #000;
+}
+.infoBoxContentsLeft A:hover {
+	font-family: Tahoma;
+	font-size: 11px;
+	font-weight: normal;
+	color: #F00;
+    text-decoration: none; 
+}
+.infoBoxContentsLeft_categ {
+    background-image: url("images/az_leftbox_category.gif");
+    background-repeat: no-repeat;
+	background-position: left top;
+    height: 22px;
+	font-family: Tahoma;
+	font-size: 11px;
+	font-weight: normal;
+	color: #000;
+	text-align: left;
+	padding-left: 20px;
+}
+.infoBoxContentsLeft_categ A:link, .infoBoxContentsLeft_categ A:active, .infoBoxContentsLeft_categ A:visited {
+	font-family: Tahoma;
+    font-size: 11px;
+    font-weight: normal;
+	color: #000;
+}
+.infoBoxContentsLeft_categ A:hover {
+	font-family: Tahoma;
+    font-size: 11px;
+    font-weight: normal;
+	color: #F00;
+}
+.infoBoxContentsRight A:link, .infoBoxContentsRight A:active, .infoBoxContentsRight A:visited{
+	font-family: Tahoma;
+	font-size: 10px;
+	font-weight: normal;
+	color: #000;
+}
+.infoBoxContentsRight A:hover {
+	font-family: Tahoma;
+	font-size: 10px;
+	font-weight: normal;
+	color: #F00;
+}
+.infoBoxContentsCenter A:link, .infoBoxContentsCenter A:active, .infoBoxContentsCenter A:visited{
+	font-family: Verdana, Arial, sans-serif;
+	font-size: 10px;
+	font-weight: normal;
+	color: #000;
+}
+.infoBoxContentsCenter A:hover {
+	font-family: Verdana, Arial, sans-serif;
+	font-size: 10px;
+	font-weight: normal;
+	color: #F00;
+}
+/* AZ product box control */
+.productBoxHeading_tb, .productBoxOuter, .productBoxBottom_tb{
+	width: 174px;	
+}
+.hl_product_box {  
+	margin: 2px;
+	padding-right:9px;
+	border: 1px solid #FFFFFF;
+	height: 154px;
+}
+.hl_product_box_over {  
+	margin: 2px;
+	padding-right:9px;
+	background-color: #FFF;
+	border: 1px solid #c0c0c0;
+	height: 154px;
+}
+.productBox {  
+	font-family: Arial, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+	text-align: center;
+	color: #7d7a78;
+}
+.productBoxLSide {
+	width: 10px;
+}
+.productBoxContent {  
+	font-family: Arial, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	color: #7d7a78;
+}
+.productBox A:link, .productBox A:active, .productBox A:visited,
+.productBoxContent A:link, .productBoxContent A:active, .productBoxContent A:visited{
+	font-family: Arial, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+	color: #000;
+}
+.productBox A:hover, .productBoxContent A:hover {
+	color: #000;
+}
+.productBoxHeadingLcorner 
+{
+}
+.productBoxHeadingRcorner {
+}
+.productBoxLBottom{
+}
+.productBoxRBottom{
+}
+.productBoxHeading, .productBoxHeadingLcorner, .productBoxHeadingRcorner {
+	line-height: 0.8;
+    font-family: Arial;
+    font-size: 11px;
+	font-weight: bold;
+	color: #FF7800;
+}
+.productBoxHeading A:link, .productBoxHeading A:active, .productBoxHeading A:visited{
+	font-family: Tahoma;
+	font-size: 11px;
+	font-weight: bold;
+	color: #A9E601;
+}
+.productBoxHeading A:hover {
+	color: #7d7a78;
+}
+.productBoxName{
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.productBoxPrice{
+	font-family: Arial, sans-serif;
+	font-size: 12px;
+	color: #555;
+	height: 25px;
+    line-height: 0.8;	
+}
+.productBoxPrice_zen{
+    background-image: url("images/az_price_tag_m.gif");
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	padding: 5px;
+	color: #ff7826;
+    line-height: 1.1;	
+	height: 50px;
+}
+.productBoxPrice s{
+  font-family: Verdana, Arial, sans-serif;
+  color: #1e2024;
+  font-weight: bold;  
+  font-size: 12px;
+}
+.productBoxBottom_tb{
+	height: 26px;
+	vertical-align:middle;
+	padding: 3px;
+	margin-right: 5px;
+	margin-right: 5px;
+}
+.productBottomLine{
+	height: 5px;
+    background-image: url("images/az_prod_hrz_line.gif");
+    background-repeat: repeat-x;
+	background-position: center;	
+}
+TR.headerError {
+}
+TD.headerError {
+  font-family: Tahoma, Verdana, Arial, sans-serif;
+  background: #DCDEB3; 
+  font-size: 11px;
+  color: red;
+  text-align : center;
+}
+TR.headerInfo {
+}
+TD.headerInfo {
+  font-family: Tahoma, Verdana, Arial, sans-serif;
+  font-size: 11px;
+  background: #DCDEB3;
+  color: #000000;
+  text-align: center;
+}
+TR.footer {
+}
+TD.footer {
+  font-family: Arial;
+  font-size: 11px;
+  background: #009384;
+  color: #ffffff;
+}
+.infoBoxNotice {
+  background: #ff7826;
+}
+.infoBoxNoticeContents {
+  background: #FFE6E6;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+}
+TR.accountHistory-odd, TR.addressBook-odd, TR.alsoPurchased-odd, TR.payment-odd, TR.productListing-odd, TR.productReviews-odd, TR.upcomingProducts-odd, TR.shippingOptions-odd {
+}
+TR.accountHistory-even, TR.addressBook-even, TR.alsoPurchased-even, TR.payment-even, TR.productListing-even, TR.productReviews-even, TR.upcomingProducts-even, TR.shippingOptions-even {
+    background-color:#ffffff;
+}
+TR.productListing-heading {
+}
+TD.productListing-heading {
+  font-family: Tahoma;
+  font-size: 12px;
+  font-weight: bold;
+  color: #ffffff;
+}
+A.productListing-heading { 
+  color: #ffffff; 
+}
+A.productListing-heading:hover { 
+  color: #7d7a78; 
+}
+TD.productListing-data {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+  border-bottom: 1px solid #c0c0c0;
+  color: #000;
+      background-color:#ffffff;
+  
+}
+.pageResults { 
+font-size: 11px;
+color: #000;
+}
+A.pageResults { 
+  color: #91afe5; 
+}
+A.pageResults:hover { 
+  color: #F6ECDC; 
+  background: #91afe5; 
+}
+/* greetUser is for ZenCart and H1 for ms3*/
+.pageHeading, DIV.pageHeading, .pageHeading H1, .greetUser, H1{
+  font-family:  Arial;
+  font-size: 15px;
+  font-weight: bold;
+  color: #000;
+  padding-top:3px;
+}
+TR.subBar {
+  background: #f4f7fd;
+}
+TD.subBar {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+  color: #000000;
+}
+TD.main, P.main {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 11px;
+  line-height: 1.3;
+  color: #000;
+}
+TD.smallText, SPAN.smallText, P.smallText {
+  color: #000;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+}
+TD.accountCategory {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 13px;
+  color: #aabbdd;
+}
+TD.fieldKey {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+}
+TD.fieldValue {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 12px;
+}
+TD.tableHeading {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+}
+SPAN.newItemInCart {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+  color: #ff0000;
+}
+CHECKBOX, INPUT, RADIO, SELECT {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 11px;
+}
+TEXTAREA {
+  width: 100%;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 11px;
+}
+SPAN.greetUser {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 12px;
+  color: #f0a480;
+  font-weight: bold;
+}
+TABLE.formArea {
+  background: #f1f9fe;
+  border-color: #7b9ebd;
+  border-style: solid;
+  border-width: 1px;
+}
+TD.formAreaTitle {
+  font-family: Tahoma, Verdana, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+}
+SPAN.markProductOutOfStock {
+  font-family: Tahoma, Verdana, Arial, sans-serif;
+  font-size: 12px;
+  color: #000;
+  font-weight: bold;
+}
+SPAN.productSpecialPrice {
+  font-family: Verdana, Arial, sans-serif;
+  color: #F00;
+  font-weight: bold;  
+  font-size: 12px;
+}
+SPAN.errorText {
+  font-family: Verdana, Arial, sans-serif;
+  color: #ff0000;
+}
+SPAN.productPrice {
+  font-family: Verdana, Arial, sans-serif;
+  color: #7d7a78;
+  font-size: 12px;
+  font-weight: normal;
+  height: 20px;
+}
+SPAN.errorText, .messageStackError {
+  font-family: Verdana, Arial, sans-serif;
+  color: #ff0000;
+}
+.inputRequirement{
+  font-family: Verdana, Arial, sans-serif;
+  color: #ff0000;
+  font-size: 11px;  
+}
+.moduleRow { }
+.moduleRowOver { background-color: #FFF; cursor: pointer; }
+.moduleRowSelected { background-color: #f2f2f2; }
+.checkoutBarFrom, .checkoutBarTo { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #8c8c8c; }
+.checkoutBarCurrent { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #000000; }
+.messageStackError, .messageStackWarning, .messageStackSuccess { font-family: Arial, sans-serif; font-size: 10px; background-color: #ffb3b5; }
+    /* #################
+		  template-faq.com CSS 
+	   #################
+	*/
+	.az_leftpage_side, .az_rightpage_side{
+	/* Solution to height 100% problem */
+	  
+	}
+	.az_leftpage_side_top{
+	background-image: url("images/az_top_bg_left.gif");
+	background-repeat:  repeat-x;
+	background-position: top right;	
+	}
+	.az_rightpage_side_top{
+	background-image: url("images/az_top_bg_left.gif");
+	background-repeat:  repeat-x;
+	background-position: top right;	
+	}
+	.az_leftpage_side_bottom, .az_rightpage_side_bottom{
+	}
+	.topbanner_tb{
+	background-image: url("images/az_header_mid.gif");
+	background-repeat:  repeat-x;
+	background-position: top;		
+	font-size: 11px; 
+	font-family: Tahoma;
+	color: #929292;
+	}	
+	.topbanner_tb A:link, .topbanner_tb A:active, .topbanner_tb A:visited{ 
+	font-size: 11px; 
+	font-family: Tahoma;
+	color: #929292;
+	font-weight: normal;
+	text-decoration: none;
+	}
+	.topbanner_tb A:hover{
+	font-size: 11px;
+	color: #ff7826;
+	}
+	.topbanner_td{
+	}
+	.topbanner_td3{
+	}
+	.az_topmenu_cart{
+	}
+	TABLE.infoBoxTop SPAN.productPriceDiscount {
+	}
+	.az_info_bar{
+	background-image:url("images/az_header_bar.gif"); 
+	background-repeat: repeat-x;
+	height: 22px;
+	}
+	.az_info_bar_td2{
+	padding-right: 5px;
+	padding-left: 5px;
+	}
+	.az_info_bar_td3{
+	}
+	/* MENU bar css controls */
+	.menubarmain A:link, .menubarmain A:active, .menubarmain A:visited{ 
+	font-size: 11px; 
+	font-family: Tahoma;
+	color: #FFF;
+	font-weight: normal;
+	text-decoration: none;
+	text-transform: uppercase;
+	}
+	.menubarmain A:hover{
+	font-size: 11px;
+	color: #F00;
+	}
+	.menubarmain{
+	font-size: 9px; 
+	font-family: Tahoma;
+	font-style: normal;
+    white-space: nowrap;
+	}
+	.menubarmain_over{
+	background-image:url(images/az_header_ms_over.gif); 
+	background-repeat: repeat-x;	
+	padding-left: 5px;
+	font-size: 9px; 
+	width: 150px;
+	}
+	.menubarmain_over A:hover{
+	font-size: 11px;
+	color: #ffffff;
+	}
+	.menubarmain_td{
+	padding-left: 5px;
+	font-size: 9px; 
+	width: 150px;
+	}
+	.az_subheader_tb{
+	}
+	/* MAIN table css controls */		
+	.maincont_tb{
+	}
+	/* LEFT bar css controls */	
+	.maincont_left_td {
+	width: 182px;
+	padding-top: 0px;
+	}
+	/* fix for mozila */
+	.leftbar_tb TD {
+	padding-bottom: 3px;
+	}	
+	.leftbar_tb {
+	width: 182px;
+	padding-bottom: 3px;
+	}
+	.maincont_mid_td{
+	padding-top: 0px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+	}
+	/* RIGHT bar css controls */		
+	.maincont_right_td {
+	padding-top: 0px;
+	padding-left: 5px;
+	width: 182px;
+	}
+	.rightbar_tb{
+	width: 175px;
+	padding-bottom: 3px;
+	}
+	/* fix for mozila */
+	.rightbar_tb TD {
+	padding-bottom: 3px;
+	}		
+	.footer_tb{
+	font-size: 10px; 
+	color: #ffffff;	
+	background-image:url(images/az_bottom_r.jpg); 
+	background-repeat: repeat-x;	
+	height: 70px;
+	}
+	.footer_td1{
+	color: #ffffff;
+	font-size: 10px; 
+	padding-left: 10px;
+	}
+	.footer_td2{
+	color: #ffffff;
+	}
+	.footer_menu_tb, .footer_cprt_tb TD, .footer_menu{
+	font-family: Tahoma;
+	font-weight: normal;
+	color: #ffffff;
+	font-size: 10px; 
+	}
+	.footer_menu_tb A:link, .footer_menu_tb A:active, .footer_menu_tb A:visited,
+	.footer_cprt_tb A:link, .footer_cprt_tb A:active, .footer_cprt_tb A:visited{ 
+	font-size: 11px; 
+	color: #a1c9e6;
+	font-family: Tahoma;
+	font-weight: normal;
+	text-decoration: none;
+	}
+	.footer_menu_tb A:hover, .footer_cprt_tb A:hover{
+	font-size: 11px;
+	color: #ffffff;
+	}
+	.az_button_img{
+	background-image:url(images/az_button_mid.gif); 
+	background-repeat: repeat-x;
+	background-position: top left;
+    white-space: nowrap;
+	color: #FFFFFF;
+	font-family: Tahoma;
+	font-weight: bold;
+	font-size: 11px; 
+	cursor: pointer;
+	display: inline;
+    text-decoration: none; 	
+	}
+	.az_button_submit{
+	background-image:url(images/az_button_mid.gif); 
+	background-repeat: repeat-x;
+    white-space: nowrap;
+	vertical-align: top;
+    border: 0px;
+	color: #FFFFFF;
+	font-family: Tahoma;
+	font-weight: bold;
+	font-size: 11px; 
+    height: 17px;
+	cursor: pointer;
+	margin: 0 auto;
+	}
+  .noborder { border: none; }
+	.alignCenter { text-align: center; }
+	.alignMiddle { vertical-align: middle; }
+
+.jsButton, .jsTrigger { cursor: pointer; }
+.animBox {
+  position: relative;
+  overflow: hidden;
+	white-space: nowrap;
+  margin: 0;
+  padding: 0;
+}
+.animBoxDropover {
+	position: absolute;
+	visibility: hidden;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	border: #91afe5 solid 1px;
+	background-color: #414141;
+	width: auto;
+	z-index: 100;
+}
+.animSubmitButton {
+	background: none !important;
+	border: none !important;
+	width: 0px !important;
+	height: 0px !important;
+}
+
+#btn_animBoxCart { 
+	height: 22px;
+}
+#animBoxCart {
+	width: 200px !important;
+}
+.animBoxCartImage { }
+.animBoxCartContent {
+	vertical-align: top;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 11px;
+	color: #ffffff;
+}
+.animBoxCartContent A:link, .animBoxCartContent A:active, .animBoxCartContent A:visited {
+	color: #91afe5;
+	text-decoration: none;
+}
+.animBoxCartContent A:hover {
+	color: #ffffff;
+	text-decoration: none;
+}
+.animBoxCartHeader, .animBoxCartFooter {
+	text-align: right;
+	vertical-align: middle;
+	font-weight: bold;
+	height: 30px;
+}
+.animBoxCartHeader { border-bottom: #c0c0c0 solid 1px; }
+.animBoxCartFooter { border-top: #c0c0c0 solid 1px; }
+.animBoxCartNotice {
+	padding: 5px;
+	text-align: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 11px;
+	color: #ffffff;
+}
+
+
+
+#infoBoxContentsBottom A:link, .infoBoxContentsBottom A:active, .infoBoxContentsBottom A:visited{
+	font-family: Tahoma;
+	font-size: 11px;
+	font-weight: normal;
+	color: #ffffff;
+}
+#infoBoxContentsBottom A:hover {
+	font-family: Tahoma;
+	font-size: 11px;
+	font-weight: normal;
+	color: #F00;
+}
+
+
+
+
+
+.asnf_normal { line-height: 130%; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; color:#333333;}  
+
+a.asnf_none:link {  color: #ff6600; text-decoration: none}
+a.asnf_none:visited { color: #ff6600; text-decoration: none}
+a.asnf_none:hover { color: #0066ff; text-decoration: none }
+
+.asnf_replyform {  border: #999999; border-style: dotted; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px}
+.asnf_error { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 15px; color:#990000; font-weight:bold;}  
+
+
+
+/* SLIMBOX */
+
+#lbOverlay {
+	position: fixed;
+	z-index: 9999;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+	cursor: pointer;
+}
+
+#lbCenter, #lbBottomContainer {
+	position: absolute;
+	z-index: 9999;
+	overflow: hidden;
+	background-color: #fff;
+}
+
+.lbLoading {
+	background: #fff url(images/loading.gif) no-repeat center;
+}
+
+#lbImage {
+	position: absolute;
+	left: 0;
+	top: 0;
+	border: 10px solid #fff;
+	background-repeat: no-repeat;
+}
+
+#lbPrevLink, #lbNextLink {
+	display: block;
+	position: absolute;
+	top: 0;
+	width: 50%;
+	outline: none;
+}
+
+#lbPrevLink {
+	left: 0;
+}
+
+#lbPrevLink:hover {
+	background: transparent url(images/prevlabel.gif) no-repeat 0 15%;
+}
+
+#lbNextLink {
+	right: 0;
+}
+
+#lbNextLink:hover {
+	background: transparent url(images/nextlabel.gif) no-repeat 100% 15%;
+}
+
+#lbBottom {
+	font-family: Verdana, Arial, Geneva, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #666;
+	line-height: 1.4em;
+	text-align: left;
+	border: 10px solid #fff;
+	border-top-style: none;
+}
+
+#lbCloseLink {
+	display: block;
+	float: right;
+	width: 66px;
+	height: 22px;
+	background: transparent url(images/closelabel.gif) no-repeat center;
+	margin: 5px 0;
+	outline: none;
+}
+
+#lbCaption, #lbNumber {
+	margin-right: 71px;
+}
+
+#lbCaption {
+	font-weight: bold;
+}
+
+
+/*should move to stylesheet.css for better markup */
+.infoBoxContents2 {
+    line-height: 0px;
+    background-color:#ffffff;
+}
+
+
+/***** Begin Sitemap_SEO *****/ 
+ul.sitemap {
+color: #000000;
+}
+.sitemap {
+	font-family: Tahoma;
+	font-size: 11px;
+  color: #000000;
+  font-weight : normal;
+}
+.sitemapHeading {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 12px;
+  color: #000000;
+  font-weight : normal;
+}
+.sitemapProducts {
+	font-family: Tahoma;
+	font-size: 11px;
+  color:#000000;
+  font-weight : normal;
+}
+A.sitemap { 
+  color: #000000;
+}
+A.sitemap:hover {
+  color: #ff0000;
+}
+/***** End Sitemap_SEO *****/ 
+
+TD.mainred{
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 11px;
+  line-height: 1.5;
+  color:#FF0000;
+  font-weight:bold;
+}
+
+
+
+/*
+// "Frontpage Slideshow" by JoomlaWorks - Version 1.7.2
+// Copyright (c) 2006 - 2008 JoomlaWorks, a Komrade LLC company.
+// This code cannot be redistributed without permission from JoomlaWorks - http://www.joomlaworks.gr.
+// More info at http://www.joomlaworks.gr and http://www.frontpageslideshow.net
+// Developers: Fotis Evangelou - George Chouliaras
+*/
+
+/* --- Slideshow Containers --- */
+#fpss-outer-container {height:294; padding:0px;margin:0px;margin-bottom:5px; overflow:hidden; border-top:1px solid #ccc;border-left:1px solid #ccc;border-right:1px solid #ccc;border-bottom:1px solid #ccc;width:<?php echo $width; ?>px;} /* This element controls the slideshow spacing and border */
+#fpss-container {position:relative;margin:0;padding:0;clear:both;width:572px;}
+#fpss-slider {padding-left:0px; margin-left:0px; align:left; background:none;overflow:hidden;clear:both;text-align:left;width:572px;height:249px;}
+#slide-loading {background:#fff url(loading.gif) no-repeat center;text-align:center;width:<?php echo $width; ?>px;height: height:249px;}
+#slide-wrapper {display:none;width:<?php echo $width; ?>px;height:249px;}
+#slide-wrapper #slide-outer {height:249px;}
+#slide-wrapper #slide-outer .slide {position:absolute;overflow:hidden;right:0;width:<?php echo $width; ?>px;height:249px;}
+#slide-wrapper #slide-outer .slide .slide-inner {position:relative;margin:0;color:#fff;overflow:hidden;background:#000;text-align:left;z-index:8;height:249px;}
+#slide-wrapper #slide-outer .slide .slide-inner a.fpss_img span span span {background:none;}
+
+/* --- Content --- */
+.fpss-introtext {width:100%;margin:0;padding:0;position:absolute;left:0;right:0;bottom:0;background:url(transparent_bg.png);}
+.fpss-introtext .slidetext {padding:4px 8px 2px 8px;}
+
+/* --- Navigation Buttons --- */
+#navi-outer {
+	clear: both;
+	margin: 0;
+	padding: 0;
+	border-top: 2px solid #505050;
+	background: url(http://localhost:7080/safensound/fpss/black_stripes.gif) repeat top;
+	overflow: hidden;
+	width: 572px;
+	height: 43px;
+}
+#navi-outer ul {margin:0;padding:2px 16px;list-style:none;background:none;text-align:left;float:left;}
+#navi-outer li {padding:0;margin:0;border:none;list-style:none;display:inline;}
+#navi-outer li a,
+#navi-outer li a:hover,
+#navi-outer li a.navi-active {display:block;float:left;overflow:hidden;width:50px;height:35px;padding:0px;margin:0px 2px;text-decoration:none;line-height:35px;background:#404040;}
+#navi-outer li a {border:1px solid #bbb;}
+#navi-outer li a:hover,
+#navi-outer li a.navi-active {border:1px solid #fff;}
+#navi-outer li a img,
+#navi-outer li a:hover img,
+#navi-outer li a.navi-active img {display:block;width:200px;height:auto;margin:-20px 0 0 -80px;padding:0;}
+#navi-outer li a span.navbar-img {}
+#navi-outer li a span.navbar-img img {opacity:0.6;-moz-opacity:0.6;filter:alpha(opacity=60);}
+#navi-outer li a:hover span.navbar-img img,
+#navi-outer li a.navi-active span.navbar-img img {opacity:1.0;-moz-opacity:1.0;filter:alpha(opacity=100);}
+#navi-outer li a span.navbar-key {display:none;}
+#navi-outer li a span.navbar-title {display:none;}
+#navi-outer li a span.navbar-tagline {display:none;}
+#navi-outer li a span.navbar-clr {display:none;}
+#navi-outer li.noimages a {font-family:Tahoma, Arial, sans-serif;font-size:10px;border:none;text-align:center;width:auto;padding:0px 4px;margin:0px;background:none;color:#fff;}
+#navi-outer li.noimages a:hover {font-family:Tahoma, Arial, sans-serif;font-size:10px;border:none;text-align:center;width:auto;padding:0px 4px;margin:0px;background:none;color:#F00;}
+
+/* --- Notice: Add custom text styling here to overwrite your template's CSS styles! --- */
+.fpss-introtext .slidetext h1 {font-family:"Trebuchet MS", Trebuchet, Arial, Verdana, sans-serif;font-size:26px;line-height:19px;margin:0;padding:0;color:#fff;}
+.fpss-introtext .slidetext h1 a {font-family:"Trebuchet MS", Trebuchet, Arial, Verdana, sans-serif;font-size:16px;line-height:19px;margin:0;padding:0;color: #fff;}
+.fpss-introtext .slidetext h1 a:hover {font-family:"Trebuchet MS", Trebuchet, Arial, Verdana, sans-serif;font-size:16px;margin:0;padding:0;color: #fff;}
+.fpss-introtext .slidetext h2 {font-size:10px;margin:0;padding:0;color:#FFF;font-weight:normal;}
+.fpss-introtext .slidetext h3 {display:none;}
+.fpss-introtext .slidetext p {margin:4px 0;padding:0;color:#fff;font-size:12px}
+.fpss-introtext .slidetext a.readon {margin:0;padding:1px 0;background:none;border:none;color:#fff;line-height:14px;}
+.fpss-introtext .slidetext a.readon:hover {margin:0;padding:1px 0;background:none;border:none;color:#F00;line-height:14px;}
+
+/* --- Generic Styling (highly recommended) --- */
+a:active,a:focus {outline:0;}
+#fpss-container img {border:none;}
+.fpss-introtext .slidetext img,
+.fpss-introtext .slidetext p img {display:none;} /* this will hide images inside the introtext */
+.fpss-clr {clear:both;height:0;line-height:0;}
+
+
+.author A:link {color: #FFFFFF;}
+.author A:visited {color: #FFFFFF;}
+.author A:active {color: #FFFFFF;}
+.author A:hover {color: red;}
+
+/* --- End of stylesheet --- */
+
