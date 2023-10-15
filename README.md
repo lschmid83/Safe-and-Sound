@@ -50,9 +50,8 @@ Search for [phpVersion] and add the following:
 ```  
 Type: item; Caption: "5.3.28"; Action: multi; Actions:switchPhp5.3.28 
 ``` 
-
-```
 At the end of the section (before ;WAMPPHPVERSIONEND), add the following code:  
+```
 [switchPhp5.3.28]  
 Action: service; Service: wampapache; ServiceAction: stop; Flags: ignoreerrors waituntilterminated  
 Action: run; FileName: "c:/wamp/bin/php/php5.3.28/php-win.exe";Parameters: "switchPhpVersion.php php5.3.28";WorkingDir: "c:/wamp/scripts"; Flags: waituntilterminated  
