@@ -27,34 +27,38 @@ This project requires you use PHP Version 5.3.28 for deprecated functions and re
 2. Create a copy of C:\wamp\bin\php\php5.3.28\php.ini-development.ini and rename it php.ini
 3. Make the following changes to php.ini
    
-error_log = "c:/wamp/logs/php_error.log"
-extension_dir = "c:/wamp/bin/php/php5.3.28/ext/"
-upload_tmp_dir = "c:/wamp/tmp"
-date.timezone = 'Europe/London'
-session.save_path = "c:/wamp/tmp"
-register_globals = On
-register_long_arrays = On
-display_errors = Off
-extension=php_mbstring.dll
-extension=php_mysql.dll
-extension=php_mysqli.dll
+```
+error_log = "c:/wamp/logs/php_error.log"  
+extension_dir = "c:/wamp/bin/php/php5.3.28/ext/"  
+upload_tmp_dir = "c:/wamp/tmp"  
+date.timezone = 'Europe/London'  
+session.save_path = "c:/wamp/tmp"  
+register_globals = On  
+register_long_arrays = On  
+display_errors = Off  
+extension=php_mbstring.dll  
+extension=php_mysql.dll  
+extension=php_mysqli.dll  
+```
 
 4. Save a copy of php.ini as phpForApache.ini in the same directory. 
    WampServer copies this file to the Apache server when you select the version from the menu.
 5. Copy the C:\wamp\bin\php\php5.5.12\wampserver.conf file from the existing PHP version into the newly installed version
 6. Make the following changes to c:\wamp\wampmanager.ini
    
-Search for [phpVersion] and add the following: 
-Type: item; Caption: "5.3.28"; Action: multi; Actions:switchPhp5.3.28
+Search for [phpVersion] and add the following:   
+Type: item; Caption: "5.3.28"; Action: multi; Actions:switchPhp5.3.28  
 
-At the end of the section (before ;WAMPPHPVERSIONEND), add the following code:
-[switchPhp5.3.28]
-Action: service; Service: wampapache; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
-Action: run; FileName: "c:/wamp/bin/php/php5.3.28/php-win.exe";Parameters: "switchPhpVersion.php php5.3.28";WorkingDir: "c:/wamp/scripts"; Flags: waituntilterminated
-Action: run; FileName: "c:/wamp/bin/php/php5.3.28/php-win.exe";Parameters: "-c . refresh.php";WorkingDir: "c:/wamp/scripts"; Flags: waituntilterminated
-Action: run; FileName: "net"; Parameters: "start wampapache"; ShowCmd: hidden; Flags: waituntilterminated
-Action: resetservices
-Action: readconfig;
+```
+At the end of the section (before ;WAMPPHPVERSIONEND), add the following code:  
+[switchPhp5.3.28]  
+Action: service; Service: wampapache; ServiceAction: stop; Flags: ignoreerrors waituntilterminated  
+Action: run; FileName: "c:/wamp/bin/php/php5.3.28/php-win.exe";Parameters: "switchPhpVersion.php php5.3.28";WorkingDir: "c:/wamp/scripts"; Flags: waituntilterminated  
+Action: run; FileName: "c:/wamp/bin/php/php5.3.28/php-win.exe";Parameters: "-c . refresh.php";WorkingDir: "c:/wamp/scripts"; Flags: waituntilterminated  
+Action: run; FileName: "net"; Parameters: "start wampapache"; ShowCmd: hidden; Flags: waituntilterminated  
+Action: resetservices  
+Action: readconfig;  
+```
 
 Configure Apache Server
 =======================
@@ -70,12 +74,13 @@ Import mySQL Databases in phpMyAdmin
 ====================================
 
 1. Open phpMyAdmin (http://localhost:7080/phpmyadmin), select the SQL tab and enter the following commands and click Go to create the database and user account:
-
-`CREATE DATABASE `web13-sns``
-`CREATE USER 'web13-sns'@'localhost' IDENTIFIED BY 'admin';`
-`USE `web13-sns`;`
-`GRANT ALL PRIVILEGES ON `web13-sns`.* TO 'web13-sns'@'localhost';`
-`FLUSH PRIVILEGES;`
+```
+CREATE DATABASE `web13-sns`
+CREATE USER 'web13-sns'@'localhost' IDENTIFIED BY 'admin';
+USE `web13-sns`;
+GRANT ALL PRIVILEGES ON `web13-sns`.* TO 'web13-sns'@'localhost';
+FLUSH PRIVILEGES;`
+```
 
 2. Select the web13-sns database in the left column tree view, click the Import tab and choose the web13-sns.sql file from the source code folder and press Go 
 
