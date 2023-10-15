@@ -41,7 +41,7 @@ extension=php_mysql.dll
 extension=php_mysqli.dll  
 ```
 
-For convenience you can download the edited file [here](https://drive.google.com/file/d/13JSlSiJLU8kw_YQ2fKKP4xHRNDmVNL4q/view?usp=sharing)
+For convenience you can download the edited file [here](https://drive.google.com/file/d/13JSlSiJLU8kw_YQ2fKKP4xHRNDmVNL4q/view?usp=sharing).
 
 4. Save a copy of php.ini as phpForApache.ini in the same directory. 
    WampServer copies this file to the Apache server when you select the version from the menu.
@@ -63,7 +63,7 @@ Action: resetservices
 Action: readconfig;  
 ```
 
-For convenience you can download the edited file [here](https://drive.google.com/file/d/19k5kwlw282KSKejsHhh-ha2xUQMuu8N3/view?usp=sharing)
+For convenience you can download the edited file [here](https://drive.google.com/file/d/19k5kwlw282KSKejsHhh-ha2xUQMuu8N3/view?usp=sharing).
 
 Configure Apache Server
 =======================
