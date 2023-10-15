@@ -46,8 +46,10 @@ extension=php_mysqli.dll
 5. Copy the C:\wamp\bin\php\php5.5.12\wampserver.conf file from the existing PHP version into the newly installed version
 6. Make the following changes to c:\wamp\wampmanager.ini
    
-Search for [phpVersion] and add the following:   
-Type: item; Caption: "5.3.28"; Action: multi; Actions:switchPhp5.3.28  
+Search for [phpVersion] and add the following: 
+```  
+Type: item; Caption: "5.3.28"; Action: multi; Actions:switchPhp5.3.28 
+``` 
 
 ```
 At the end of the section (before ;WAMPPHPVERSIONEND), add the following code:  
