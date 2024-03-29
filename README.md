@@ -2,6 +2,11 @@
 
 Safe and Sound is an osCommerce website I built for a car audio supplier using the PHP Language and MySQL database.
 
+Here are some screenshots of the website:
+
+<img align='left' src='https://drive.google.com/uc?id=1V62KnOZxXVRT-Es0XTFaP0xNsoa0799e' width='240'>
+<img src='https://drive.google.com/uc?id=1iNk0kM733-TUwJX1glJVhtnbmJDh4KAb' width='240'>
+
 These are the instructions to setup the website running locally using WAMP Server.
 
 Download the required software here:
