@@ -70,6 +70,8 @@ Action: readconfig;
 
 For convenience you can download the edited file [here](https://drive.google.com/file/d/19k5kwlw282KSKejsHhh-ha2xUQMuu8N3/view?usp=sharing)
 
+Right click on the WampServer icon in the taskbar select exit and then restart the server.
+
 Configure Apache Server
 =======================
 
