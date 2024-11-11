@@ -85,13 +85,13 @@ Enable mod_rewrite in Apache configuration.
 Import mySQL Databases in phpMyAdmin
 ====================================
 
-1. Open phpMyAdmin (http://localhost:7080/phpmyadmin), select the SQL tab and enter the following commands and click Go to create the database and user account:
+1. Open phpMyAdmin (http://localhost:7080/phpmyadmin), select the SQL tab and enter the following commands individually and click Go to create the database and user account:
 ```
 CREATE DATABASE `web13-sns`
 CREATE USER 'web13-sns'@'localhost' IDENTIFIED BY 'admin';
 USE `web13-sns`;
 GRANT ALL PRIVILEGES ON `web13-sns`.* TO 'web13-sns'@'localhost';
-FLUSH PRIVILEGES;`
+FLUSH PRIVILEGES;
 ```
 
 2. Select the web13-sns database in the left column tree view, click the Import tab and choose the web13-sns.sql file from the source code folder and press Go 
@@ -99,7 +99,7 @@ FLUSH PRIVILEGES;`
 Open the osCommerce Website from Localhost
 ==========================================
 
-1. Copy the contents of the safensound folder to the C:\wamp\www\ folder
+1. Copy the safensound folder to the C:\wamp\www\ folder
 2. Open http://localhost:7080/safensound in a browser and you should see the homepage
 3. The osCommerce website admin page can be accessed at http://localhost:7080/safensound/admin
 
